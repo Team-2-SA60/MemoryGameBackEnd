@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
   #   - name: Set up .NET SDK
   #     uses: actions/setup-dotnet@v4
@@ -63,7 +63,7 @@ jobs:
           
           # Run the new container with environment variables
           docker run -d \
-          --name myapp \
-          -p 80:5000 \
-          -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" \
-          "${{ secrets.DOCKER_USER }}"/$IMAGE_NAME
+            --name $IMAGE_NAME \
+            -p 80:5000 \
+            -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" \
+            ${{ secrets.DOCKER_USER }}/$IMAGE_NAME:latest
