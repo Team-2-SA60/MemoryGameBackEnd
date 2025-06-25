@@ -23,9 +23,9 @@ namespace MemoryGameBackEnd.Controllers
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public ActionResult<List<User>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return _context.Users.ToList();
         }
 
         // GET: api/User/5
