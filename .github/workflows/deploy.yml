@@ -9,10 +9,10 @@ env:
   IMAGE_TAG: latest
 
 jobs:
-  # build-and-deploy:
-  #   runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-  #   steps:
+    steps:
   #   - name: Checkout code
   #     uses: actions/checkout@v4
 
