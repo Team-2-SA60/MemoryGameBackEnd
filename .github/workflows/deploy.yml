@@ -47,10 +47,13 @@ jobs:
 
     - name: Deploy to DigitalOcean Droplet
       uses: appleboy/ssh-action@v1.2.2
+      env:
+        IMAGE_NAME: $IMAGE_NAME
       with:
         host: ${{ secrets.DO_HOST }}
         username: root
         key: ${{ secrets.DO_SSH }}
+        envs: IMAGE_NAME
         script: |
           # Pull the latest image
           docker pull ${{ secrets.DOCKER_USER }}/$IMAGE_NAME
