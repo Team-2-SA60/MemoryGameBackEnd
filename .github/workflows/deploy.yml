@@ -1,0 +1,44 @@
+name: Build and Deploy .NET App with Docker
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: yourapp
+  IMAGE_TAG: latest
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build and test
+      run: |
+        dotnet build --no-restore
+        dotnet test --no-build --verbosity normal
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USER }}/$IMAGE_NAME:$IMAGE_TAG .
+
+    - name: Push Docker image
+      run: |
+        docker push ${{ secrets.DOCKER_USER }}/$IMAGE_NAME:$IMAGE_TAG
