@@ -46,7 +46,7 @@ jobs:
         docker push ${{ secrets.DOCKER_USER }}/$IMAGE_NAME:$IMAGE_TAG
 
     - name: Deploy to DigitalOcean Droplet
-      uses: appleboy/ssh-action@v1.4.0
+      uses: appleboy/ssh-action@v1.2.2
       with:
         host: ${{ secrets.DO_HOST }}
         username: root
