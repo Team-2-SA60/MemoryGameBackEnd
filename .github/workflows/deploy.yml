@@ -62,4 +62,4 @@ jobs:
           fi
           
           # Run the new container with environment variables
-          docker run -d -p 80:5000 -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" ${{ secrets.DOCKER_USER }}/yourapp:latest
+          docker run -d --name yourapp -p 80:5000 -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" ${{ secrets.DOCKER_USER }}/yourapp:latest
