@@ -47,22 +47,19 @@ jobs:
 
     - name: Deploy to DigitalOcean Droplet
       uses: appleboy/ssh-action@v1.2.2
-      env:
-        IMAGE_NAME: $IMAGE_NAME
       with:
         host: ${{ secrets.DO_HOST }}
         username: root
         key: ${{ secrets.DO_SSH }}
-        envs: IMAGE_NAME
         script: |
           # Pull the latest image
-          docker pull ${{ secrets.DOCKER_USER }}/$IMAGE_NAME
+          docker pull ${{ secrets.DOCKER_USER }}/yourapp:latest
           
           # Stop and remove existing container if running
           if [ "$(docker ps -f "name=$IMAGE_NAME" --format "{{.Status}}")" ]; then
-            docker stop $IMAGE_NAME
-            docker rm $IMAGE_NAME
+            docker stop yourapp
+            docker rm yourapp
           fi
           
           # Run the new container with environment variables
-          docker run -d -p 80:5000 -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" ${{ secrets.DOCKER_USER }}/$IMAGE_NAME:latest
+          docker run -d -p 80:5000 -e ConnectionStrings__MySQL="${{ secrets.CONNECTION_STRING }}" ${{ secrets.DOCKER_USER }}/yourapp:latest
