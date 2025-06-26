@@ -20,102 +20,40 @@ namespace MemoryGameBackEnd.Controllers
         {
             _context = context;
         }
+        
+        // POST: api/User/login
+        // For login activity
+        [HttpPost]
+        [Route("login")]
+        public ActionResult<UserDTO> Login(string username, string password)
+        {
+            if (!UserExists(username))
+            {
+                return NotFound();
+            }
+            
+            var user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
-        // GET: api/User
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(new UserDTO(user));
+        }
+        
+        // GET: api/User/list
+        // For testing purpose, get list of all users in database
         [HttpGet]
+        [Route("list")]
         public ActionResult<List<User>> GetUsers()
         {
             return _context.Users.ToList();
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        private bool UserExists(string username)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
-
-        // PUT: api/User/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-        
-        [HttpPost("upload-avatar")]
-        public async Task<IActionResult> UploadAvatar(int userId, IFormFile avatar)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null) return NotFound();
-
-            using var ms = new MemoryStream();
-            await avatar.CopyToAsync(ms);
-            user.AvatarImage = ms.ToArray();
-
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Username == username);
         }
     }
 }
