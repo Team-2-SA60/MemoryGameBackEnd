@@ -16,17 +16,45 @@ public class GameController : ControllerBase
         _context = context;
     }
 
+    // GET api/Game/top10?daysAgo=
     // Get the top 10 games (ordered by least completion times)
     [HttpGet]
-    public ActionResult<List<Game>> FindTopGames()
+    [Route("top10")]
+    public ActionResult<List<Game>> FindTopGames(int daysAgo)
     {
+        if (daysAgo == 0)
+        {
+            return Ok(FindAllTimeTopGames());
+        }
+        
+        var fromDate = DateTime.Today.AddDays(-daysAgo);
+
         return _context.Games
-            .FromSql($"SELECT * FROM Games g ORDER BY g.CompletionTime ASC LIMIT 10")
+            .Where(g => g.Date >= fromDate)
+            .OrderBy(g => g.CompletionTime)
+            .Take(10)
             .Include(g => g.User)
             .ToList();
     }
+    
+    // POST api/Game/create
+    // Create newly completed games
+    [HttpPost]
+    [Route("create")]
+    public ActionResult<Game> CreateGame(Game game)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
 
-    [HttpGet("{id}")]
+        _context.Games.Add(game);
+        _context.SaveChanges();
+
+        return CreatedAtAction(nameof(FindGame), new { id = game.Id }, game);
+    }
+    
+    // GET api/Game/find/{id}
+    // For testing purpose. Find the first game by gameId
+    [HttpGet]
+    [Route("find/{id}")]
     public ActionResult<Game> FindGame(int id)
     {
         var game = _context.Games
@@ -38,15 +66,12 @@ public class GameController : ControllerBase
         return game;
     }
 
-    // Post request to add newly completed games
-    [HttpPost]
-    public ActionResult<Game> AddGame(Game game)
+    private List<Game> FindAllTimeTopGames()
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        _context.Games.Add(game);
-        _context.SaveChanges();
-
-        return CreatedAtAction(nameof(FindGame), new { id = game.Id }, game);
+        return _context.Games
+            .Include(g => g.User)
+            .OrderBy(g => g.CompletionTime)
+            .Take(10)
+            .ToList();
     }
 }
