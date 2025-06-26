@@ -17,12 +17,12 @@ public class SeedData
 
             var users = new List<User>
             {
-                new User { Username = "Adrian", Password = "a", IsPremium = true },
-                new User { Username = "GY", Password = "a", IsPremium = false },
-                new User { Username = "CY", Password = "a", IsPremium = true },
-                new User { Username = "KS", Password = "a", IsPremium = false },
-                new User { Username = "Freeuser", Password = "free", IsPremium = true },
-                new User { Username = "Paiduser", Password = "paid", IsPremium = false },
+                new User { Username = "Adrian", Password = "a", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/dog.png")},
+                new User { Username = "GY", Password = "a", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/chikawa.jpg") },
+                new User { Username = "CY", Password = "a", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/gopher.jpg") },
+                new User { Username = "KS", Password = "a", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/cat.jpg") },
+                new User { Username = "Freeuser", Password = "free", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/dog.png") },
+                new User { Username = "Paiduser", Password = "paid", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/kiwi.jpg") },
             };
 
             context.Users.AddRange(users);
