@@ -33,7 +33,7 @@ namespace MemoryGameBackEnd.Migrations
                     b.Property<int>("CompletionTime")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserId")
