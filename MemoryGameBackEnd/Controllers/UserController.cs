@@ -25,8 +25,11 @@ namespace MemoryGameBackEnd.Controllers
         // For login activity
         [HttpPost]
         [Route("login")]
-        public ActionResult<UserDto> Login(string username, string password)
+        public ActionResult<UserDto> Login(UserLoginBindingModel userLoginBindingModel)
         {
+            var username = userLoginBindingModel.Username;
+            var password = userLoginBindingModel.Password;
+
             if (!UserExists(username))
             {
                 return NotFound();
