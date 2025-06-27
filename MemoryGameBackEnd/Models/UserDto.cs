@@ -1,13 +1,13 @@
 ﻿namespace MemoryGameBackEnd.Models;
 
-public class UserDTO
+public class UserDto
 {
     public int Id { get; set; }
     public string? Username { get; set; }
     public bool? IsPremium { get; set; }
     public byte[]? AvatarImage { get; set; }
 
-    public UserDTO(User user)
+    public UserDto(User user)
     {
         Id = user.Id;
         Username = user.Username;

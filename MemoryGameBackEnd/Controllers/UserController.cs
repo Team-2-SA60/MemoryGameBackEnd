@@ -25,7 +25,7 @@ namespace MemoryGameBackEnd.Controllers
         // For login activity
         [HttpPost]
         [Route("login")]
-        public ActionResult<UserDTO> Login(string username, string password)
+        public ActionResult<UserDto> Login(string username, string password)
         {
             if (!UserExists(username))
             {
@@ -39,7 +39,7 @@ namespace MemoryGameBackEnd.Controllers
                 return Unauthorized();
             }
             
-            return Ok(new UserDTO(user));
+            return Ok(new UserDto(user));
         }
         
         // GET: api/User/list
