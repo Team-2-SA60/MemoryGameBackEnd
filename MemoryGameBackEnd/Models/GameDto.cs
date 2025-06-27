@@ -4,6 +4,7 @@ public class GameDto
 {
     public int? GameId { get; set; }
     public int? UserId { get; set; }
+    public string? Username { get; set; }
     public int? CompletionTime { get; set; }
     public byte[]? AvatarImage { get; set; }
 
@@ -11,6 +12,7 @@ public class GameDto
     {
         GameId = game.Id;
         UserId = game.UserId;
+        Username = game.User?.Username;
         CompletionTime = game.CompletionTime;
         AvatarImage = game.User?.AvatarImage;
     }
