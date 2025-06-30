@@ -1,7 +1,7 @@
-﻿using MemoryGameBackEnd.data;
+﻿using MemoryGameBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MemoryGameBackEnd.Models;
+namespace MemoryGameBackEnd.data;
 
 public class SeedData
 {
@@ -32,25 +32,33 @@ public class SeedData
             var games = new List<Game>
             {
                 // Adrian
-                new Game { UserId = users[0].Id, CompletionTime = 75, Date = now.AddDays(-4) },
-                new Game { UserId = users[0].Id, CompletionTime = 65, Date = now.AddDays(-2) },
-                new Game { UserId = users[0].Id, CompletionTime = 80, Date = now.AddHours(-10) },
+                new Game { UserId = users[0].Id, CompletionTime = 75, Date = now.AddDays(-2) },
+                new Game { UserId = users[0].Id, CompletionTime = 65, Date = now.AddDays(-8) },
+                new Game { UserId = users[0].Id, CompletionTime = 80, Date = now.AddDays(-32) },
 
                 // GY
                 new Game { UserId = users[1].Id, CompletionTime = 120, Date = now.AddDays(-3) },
-                new Game { UserId = users[1].Id, CompletionTime = 95, Date = now.AddDays(-1) },
+                new Game { UserId = users[1].Id, CompletionTime = 95, Date = now.AddDays(-35) },
 
                 // CY
-                new Game { UserId = users[2].Id, CompletionTime = 70, Date = now.AddDays(-7) },
-                new Game { UserId = users[2].Id, CompletionTime = 60, Date = now.AddDays(-5) },
-                new Game { UserId = users[2].Id, CompletionTime = 50, Date = now.AddHours(-4) },
+                new Game { UserId = users[2].Id, CompletionTime = 70, Date = now.AddDays(-5) },
+                new Game { UserId = users[2].Id, CompletionTime = 60, Date = now.AddDays(-14) },
+                new Game { UserId = users[2].Id, CompletionTime = 50, Date = now.AddHours(-31) },
 
                 // KS
                 new Game { UserId = users[3].Id, CompletionTime = 110, Date = now.AddDays(-6) },
-                new Game { UserId = users[3].Id, CompletionTime = 130, Date = now.AddHours(-2) }
+                new Game { UserId = users[3].Id, CompletionTime = 130, Date = now.AddHours(-15) }
             };
 
             context.AddRange(games);
+            context.SaveChanges();
+
+            var adverts = new List<Advertisement>
+            {
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert1.png") }
+            };
+            
+            context.AddRange(adverts);
             context.SaveChanges();
         }
     }

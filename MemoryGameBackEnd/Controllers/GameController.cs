@@ -1,4 +1,5 @@
 using MemoryGameBackEnd.data;
+using MemoryGameBackEnd.DTOs;
 using MemoryGameBackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,8 @@ namespace MemoryGameBackEnd.Controllers;
 [ApiController]
 public class GameController : ControllerBase
 {
+    // DI
     private readonly MemoryGameBackEndContext _context;
-
     public GameController(MemoryGameBackEndContext context)
     {
         _context = context;
@@ -22,6 +23,7 @@ public class GameController : ControllerBase
     [Route("top10")]
     public ActionResult<List<GameDto>> FindTopGames(int daysAgo)
     {
+        // if no query, then return All-Time top games
         if (daysAgo == 0)
         {
             return GameDto.ConvertList(FindAllTimeTopGames());
@@ -29,7 +31,7 @@ public class GameController : ControllerBase
         
         var fromDate = DateTime.Today.AddDays(-daysAgo);
 
-        var games = _context.Games
+        List<Game> games = _context.Games
             .Where(g => g.Date >= fromDate)
             .OrderBy(g => g.CompletionTime)
             .Take(10)
@@ -59,21 +61,26 @@ public class GameController : ControllerBase
     [Route("find/{id}")]
     public ActionResult<GameDto> FindGame(int id)
     {
-        var game = _context.Games
+        Game? game = _context.Games
             .Include(g => g.User)
             .FirstOrDefault(g => g.Id == id);
 
-        if (game == null) return NotFound();
+        if (game == null)
+        {
+            return NotFound("No game found");
+        }
 
         return new GameDto(game);
     }
-
+    
     private List<Game> FindAllTimeTopGames()
     {
-        return _context.Games
+        List<Game> games = _context.Games
             .Include(g => g.User)
             .OrderBy(g => g.CompletionTime)
             .Take(10)
             .ToList();
+
+        return games;
     }
 }

@@ -11,6 +11,7 @@ public class MemoryGameBackEndContext : DbContext
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Game> Games { get; set; } = null!;
+    public DbSet<Advertisement> Advertisements { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
