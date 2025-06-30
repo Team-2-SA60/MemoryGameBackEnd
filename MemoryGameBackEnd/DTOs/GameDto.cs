@@ -1,4 +1,6 @@
-namespace MemoryGameBackEnd.Models;
+using MemoryGameBackEnd.Models;
+
+namespace MemoryGameBackEnd.DTOs;
 
 public class GameDto
 {

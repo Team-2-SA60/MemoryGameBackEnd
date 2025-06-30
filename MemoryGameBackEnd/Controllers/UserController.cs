@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MemoryGameBackEnd.Models;
 using MemoryGameBackEnd.data;
+using MemoryGameBackEnd.DTOs;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MemoryGameBackEnd.Controllers
 {
@@ -25,24 +22,29 @@ namespace MemoryGameBackEnd.Controllers
         // For login activity
         [HttpPost]
         [Route("login")]
-        public ActionResult<UserDto> Login(UserLoginBindingModel userLoginBindingModel)
+        public ActionResult<UserResponseDto> Login(UserRequestDto userRequestDto)
         {
-            var username = userLoginBindingModel.Username;
-            var password = userLoginBindingModel.Password;
+            var username = userRequestDto.Username;
+            var password = userRequestDto.Password;
 
-            if (!UserExists(username))
+            if (username.IsNullOrEmpty() || password.IsNullOrEmpty())
             {
-                return NotFound();
+                return BadRequest("Username or password is empty");
             }
             
-            var user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            if (!UserExists(username!))
+            {
+                return NotFound("Username not found");
+            }
+            
+            User? user = _context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
 
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid username or password");
             }
             
-            return Ok(new UserDto(user));
+            return Ok(new UserResponseDto(user));
         }
         
         // GET: api/User/list
