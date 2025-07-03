@@ -55,9 +55,16 @@ public class SeedData
 
             var adverts = new List<Advertisement>
             {
-                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert1.png") }
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert1.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert2.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert3.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert4.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert5.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert6.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert7.png") },
+                new Advertisement { Image = File.ReadAllBytes("SeedImages/advert8.png") },
             };
-            
+
             context.AddRange(adverts);
             context.SaveChanges();
         }
