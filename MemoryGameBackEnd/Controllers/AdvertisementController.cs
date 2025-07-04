@@ -36,25 +36,20 @@ namespace MemoryGameBackEnd.Controllers
         // To get a random advertisement
         [HttpGet]
         [Route("random")]
-        public IActionResult GetRandomAdvertisement()
+        public ActionResult<byte[]> GetRandomAdvertisement()
         {
             List<Advertisement> adverts = _context.Advertisements.ToList();
-
+            
             if (adverts.Count == 0 || adverts.IsNullOrEmpty())
             {
                 return NotFound("No advertisement found");
             }
 
             Advertisement randomAdvert = adverts[new Random().Next(adverts.Count)];
-
-            // return Ok(randomAdvert.Image);
-            // return raw PNG bytes
-            return File(
-                fileContents: randomAdvert.Image,
-                contentType: "image/png"
-            );
+            
+            return Ok(randomAdvert.Image);
         }
-
+        
         // POST: api/Advertisement/create
         [HttpPost]
         [Route("create")]
