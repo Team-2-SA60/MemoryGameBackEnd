@@ -21,8 +21,8 @@ public class SeedData
                 new User { Username = "GY", Password = "a", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/chikawa.jpg") },
                 new User { Username = "CY", Password = "a", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/gopher.jpg") },
                 new User { Username = "KS", Password = "a", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/cat.jpg") },
-                new User { Username = "Freeuser", Password = "free", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/dog.png") },
-                new User { Username = "Paiduser", Password = "paid", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/kiwi.jpg") },
+                new User { Username = "Freeuser", Password = "free", IsPremium = false, AvatarImage = File.ReadAllBytes("SeedImages/dog.png") },
+                new User { Username = "Paiduser", Password = "paid", IsPremium = true, AvatarImage = File.ReadAllBytes("SeedImages/kiwi.jpg") },
             };
 
             context.Users.AddRange(users);

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MemoryGameBackEnd.Migrations
 {
     [DbContext(typeof(MemoryGameBackEndContext))]
-    [Migration("20250625133328_addavatar")]
-    partial class addavatar
+    [Migration("20250704053533_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace MemoryGameBackEnd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("MemoryGameBackEnd.Models.Advertisement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Advertisements");
+                });
 
             modelBuilder.Entity("MemoryGameBackEnd.Models.Game", b =>
                 {
@@ -36,7 +53,7 @@ namespace MemoryGameBackEnd.Migrations
                     b.Property<int>("CompletionTime")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserId")
