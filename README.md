@@ -1,15 +1,11 @@
-# 🧠 Memory Game Team 2 SA4108 (Backend - ASP.NET) 🧠
+# Memory Game Team 2 SA4108 🧠 (Backend)
 [![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+[![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/imksc/yourapp/general)
-![DigitalOcean](https://img.shields.io/badge/DigitalOcean-%230167ff.svg?style=for-the-badge&logo=digitalOcean&logoColor=white)
+[![DigitalOcean](https://img.shields.io/badge/DigitalOcean-%230167ff.svg?style=for-the-badge&logo=digitalOcean&logoColor=white)](https://www.digitalocean.com/)
 
----
-
-A card matching game built in Kotlin (Android Studio) and .NET (Backend). This repository is the ASP.NET backend. Android Native Frontend can be accessed [here](https://github.com/Team-2-SA60/MemoryGameAndroid.git).
-\
-\
-This project utilises GitHub Actions for Continuous Deployment to DigitalOcean Cloud
+#### A card matching game built in Kotlin (Android Studio) and .NET (Backend). This repository is the ASP.NET backend. Android Native Frontend can be accessed [here](https://github.com/Team-2-SA60/MemoryGameAndroid.git).
+#### This project utilises GitHub Actions for Continuous Deployment to DigitalOcean Cloud
 ---
 
 ## Getting Started
