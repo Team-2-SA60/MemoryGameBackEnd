@@ -17,12 +17,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    SeedData.Initialize(services);
-}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -36,4 +30,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Initialise database
+InitDb();
+
 app.Run();
+
+void InitDb()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<MemoryGameBackEndContext>();
+
+        if (!context.Database.CanConnect())
+        {
+            context.Database.EnsureCreated();
+        }
+
+        var services = scope.ServiceProvider;
+        SeedData.Initialize(services);
+    }
+}
