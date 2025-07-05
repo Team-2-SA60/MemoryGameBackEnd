@@ -17,52 +17,52 @@
 
 ### Installation
 1. Clone Repo
-```
-git clone https://github.com/Team-2-SA60/MemoryGameBackEnd.git
-```
+   ```
+   git clone https://github.com/Team-2-SA60/MemoryGameBackEnd.git
+
 2. Open terminal and change directory 2 times to access project files
-```
-cd MemoryGameBackEnd
-```
-```
-cd MemoryGameBackEnd
-```
+   ```
+   cd MemoryGameBackEnd
+   ```
+   ```
+   cd MemoryGameBackEnd
+   ```
 3. Restore dependencies
-```
-dotnet restore
-```
+   ```
+   dotnet restore
+   ```
 4. Update SQL Connection String for the following file to your local MySQL server credentials
-```
-appsettings.json
-```
-```json
-"MySQL": "server=localhost;database=MemoryGame;user=root;password=sql"
-```
-Replace
-> user={Your_MySQL_Username} \
-> password={Your_MySQL_password}
+   ```
+   appsettings.json
+   ```
+   ```json
+   "MySQL": "server=localhost;database=MemoryGame;user=root;password=sql"
+   ```
+- Replace
+   > user={Your_MySQL_Username} \
+   > password={Your_MySQL_password}
 5. Run the application
-```
-dotnet run
-```
+   ```
+   dotnet run
+   ```
 6. Test API requests
-```bash
-curl -X 'GET' \
-  'http://localhost:5062/api/Game/top10?daysAgo=0' \
-  -H 'accept: text/plain'
-```
-Expected json output
-```json
-[
-  {
-    "gameId": 0,
-    "userId": 0,
-    "username": string,
-    "completionTime": 0,
-    "avatarImage": string
-  }
-]
-```
+   ```bash
+   curl -X 'GET' \
+     'http://localhost:5062/api/Game/top10?daysAgo=0' \
+     -H 'accept: text/plain'
+   ```
+- Expected json output
+   ```json
+   [
+      {
+         "gameId": 0,
+         "userId": 0,
+         "username": string,
+         "completionTime": 0,
+         "avatarImage": string
+      }
+   ]
+   ```
 ---
 ## Team 2️⃣
 
