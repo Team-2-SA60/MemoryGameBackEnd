@@ -4,8 +4,10 @@
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/imksc/yourapp/general)
 [![DigitalOcean](https://img.shields.io/badge/DigitalOcean-%230167ff.svg?style=for-the-badge&logo=digitalOcean&logoColor=white)](https://www.digitalocean.com/)
 
-#### A card matching game built in Kotlin (Android Studio) and .NET (Backend). This repository is the ASP.NET backend. Android Native Frontend can be accessed [here](https://github.com/Team-2-SA60/MemoryGameAndroid.git).
-#### This project utilises GitHub Actions for Continuous Deployment to DigitalOcean Cloud
+A card matching game built in Kotlin (Android Studio) and .NET (Backend). This repository is the ASP.NET backend. Android Native Frontend can be accessed [here](https://github.com/Team-2-SA60/MemoryGameAndroid.git).
+
+This project utilises GitHub Actions for Continuous Deployment to DigitalOcean Cloud
+
 ---
 
 ## Getting Started
@@ -19,7 +21,6 @@
 1. Clone Repo
    ```
    git clone https://github.com/Team-2-SA60/MemoryGameBackEnd.git
-
 2. Open terminal and change directory 2 times to access project files
    ```
    cd MemoryGameBackEnd
@@ -63,7 +64,9 @@
       }
    ]
    ```
+   
 ---
+
 ## Team 2️⃣
 
 - [@Adrian](https://github.com/adriantlh)
